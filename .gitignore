@@ -36,5 +36,4 @@ node_modules
 .vscode
 
 # Config
-prefs.json
-token.js
+config.js
