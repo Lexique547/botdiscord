@@ -1,0 +1,12 @@
+image: node:latest
+
+before_script:
+  - npm i
+  
+stages:
+  - test
+
+run_tests:
+  stage: test
+  script:
+    - npm run test
