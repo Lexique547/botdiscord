@@ -22,20 +22,21 @@ bot.on('ready', () => {
   for (let guild of bot.guilds.array()) {
     // Check if the role exists
     if (guild.roles.filter(obj => obj.name === config.roleName).first() === null ||
-    guild.roles.filter(obj => obj.name === config.roleName).first() === undefined) {
+        guild.roles.filter(obj => obj.name === config.roleName).first() === undefined
+    ) {
       // Show an error if it doesn't
       log.e(`Role doesn't exist on Server: ${guild.name}`)
-    }
-
-    // Iterate over every member of the current server
-    for (let member of guild.members.array()) {
-      // If they're live
-      if (member.presence.game !== null && member.presence.game.type === 1) {
+    } else {
+      // Iterate over every member of the current server
+      for (let member of guild.members.array()) {
+        // If they're live
+        if (member.presence.game !== null && member.presence.game.type === 1) {
         // Add the role
-        member.addRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
-      } else {
+          member.addRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
+        } else {
         // If they're not, try to remove / remove the role
-        member.removeRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
+          member.removeRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
+        }
       }
     }
   }
@@ -43,12 +44,19 @@ bot.on('ready', () => {
 
 // Every time a user updates their status
 bot.on('presenceUpdate', (oldMember, member) => {
-  // If they're live
-  if (member.presence.game !== null && member.presence.game.type === 1) {
-    // Add the role
+  // Check if the role exists
+  if (member.guild.roles.filter(obj => obj.name === config.roleName).first() === null ||
+      member.guild.roles.filter(obj => obj.name === config.roleName).first() === undefined
+  ) {
+    // Show an error if it doesn't
+    log.e(`Role doesn't exist on Server: ${member.guild.name}`)
+
+    // If they're live
+  } else if (member.presence.game !== null && member.presence.game.type === 1) {
+  // Add the role
     member.addRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
   } else {
-    // If they're not, try to remove / remove the role
+  // If they're not, try to remove / remove the role
     member.removeRole(member.guild.roles.filter(obj => obj.name === config.roleName).first()).catch(console.error)
   }
 })
