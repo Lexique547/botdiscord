@@ -14,8 +14,9 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 const log = require('fancylog')
 
-// DB Setup Handlers
+// Local Dependencies
 const dbSetup = require('./dbSetup.js')
+const handlePresence = require('./handlePresence.js')
 
 // Call Database Setup
 dbSetup.main()
@@ -67,8 +68,17 @@ bot.on('ready', () => {
   dbSetup.updateGuilds(bot.guilds.array().map(o => o.id))
 })
 
+/**
+ * Guild Create Handler
+ * Triggered when the bot joins a new guild
+ */
 bot.on('guildCreate', guild => {
+  // Add the guild to the DB
   dbSetup.updateGuilds([guild.id])
+})
+
+bot.on('presenceUpdate', (old, member) => {
+  handlePresence(member)
 })
 
 /**
