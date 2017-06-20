@@ -14,14 +14,16 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 const log = require('fancylog')
 
-// Login
+// Login to Discord
 bot.login(config.token)
 
 /**
  * Set Bots 'Now Playing' Status
  */
 const setGame = () => {
+  // Select random status from config array
   let status = config.statuses[Math.floor(Math.random() * config.statuses.length)]
+  // Set status
   bot.user.setGame(status)
 }
 
@@ -34,16 +36,22 @@ bot.on('ready', () => {
   log.i('Connected to Discord!')
 
   // Status Rotation
+  // Call Once
   setGame()
+  // Loop every 15 seconds
   setInterval(() => { setGame() }, 15 * 1000)
 
-  // Try to change avatar
+  // Avatar Change Logic
+  // Try (handles errors)
   try {
+    // Set Avatar to configured file
     bot.user.setAvatar(path.join('src/shared/avatar', config.avatar))
       .catch(() => {
-        // Do nothing
+        // Do nothing if API error
       })
   } catch (ex) {
+    // If error (missing file)
+    // Log
     log.e('Avatar not found. Check config.js')
   }
 })
@@ -57,6 +65,7 @@ bot.on('message', msg => {
   if (msg.author.bot) return
 
   // Command Handling
+  // This logic is pretty custom, I won't try to explain all of it
   let command
   if (msg.content.startsWith(`<@${bot.user.id}>`) || msg.content.startsWith(`<@!${bot.user.id}>`)) {
     command = handleCommand(msg)
@@ -99,6 +108,11 @@ bot.on('message', msg => {
  * @returns {string}
  */
 const rawHandler = raw => {
+  // Also mostly custom logic.
+  // Basically splits a command string into parts
+  // EG: a b "c d"
+  // Becomes
+  // ['a', 'b', 'c d']
   let arr = raw.split(' ')
 
   let newArr = []
@@ -137,6 +151,8 @@ const rawHandler = raw => {
  * @returns {string}
  */
 const handleCommand = (msg, prefix = null) => {
+  // CUUUUSTOOOM LOOOGIC
+  // Woop
   let raw
   if (prefix === null) {
     raw = msg.content
