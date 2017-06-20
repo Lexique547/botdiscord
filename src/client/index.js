@@ -123,8 +123,14 @@ bot.on('message', msg => {
         } else {
           command.msg.channel.send(':x: NSFW commands can only be used in NSFW Channels.')
         }
-      } else if (selectedCommand.admin) {
+      } else if (selectedCommand.owner) {
         if (config.ownerId === command.msg.author.id) {
+          selectedCommand.func(command)
+        } else {
+          command.msg.channel.send(':x: You do not have permission to do that.')
+        }
+      } else if (selectedCommand.admin) {
+        if (msg.member.hasPermission('ADMINISTRATOR') || config.ownerId === command.msg.author.id) {
           selectedCommand.func(command)
         } else {
           command.msg.channel.send(':x: You do not have permission to do that.')

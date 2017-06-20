@@ -19,7 +19,7 @@ const mainFunc = command => {
 module.exports = {
   func: mainFunc,
   nsfw: false,
-  admin: true,
+  owner: true,
   description: 'Changes the bots Discord username.',
   arguments: [],
 }
