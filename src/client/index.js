@@ -72,7 +72,7 @@ bot.on('ready', () => {
   for (let guild of bot.guilds.array()) {
     for (let member of guild.members.array()) {
       // Check it's presence
-      handlePresence(member)
+      handlePresence(member, null, bot)
     }
   }
 })
@@ -87,7 +87,7 @@ bot.on('guildCreate', guild => {
 })
 
 bot.on('presenceUpdate', (old, member) => {
-  handlePresence(member)
+  handlePresence(member, old, bot)
 })
 
 /**
