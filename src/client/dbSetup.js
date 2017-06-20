@@ -31,6 +31,8 @@ const updateGuilds = arr => {
             prefixOverride: null,
             roleName: '',
             announceStreams: false,
+            announceChannel: '',
+            announceEveryone: false,
           }
         }
       }
