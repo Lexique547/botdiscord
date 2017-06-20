@@ -1,5 +1,6 @@
 // Package Dependencies
 const fs = require('fs')
+const path = require('path')
 
 // Bot Metadata
 const BOT_AUTHOR = 'lolPants'
@@ -131,7 +132,7 @@ const mainFunc = command => {
   }
 
   // Read Template File
-  fs.readFile('../shared/templates/help.txt', 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, '..', '..', 'shared', 'templates', 'help.txt'), 'utf8', (err, data) => {
     // Handle Error
     if (err) return console.error(err)
 
