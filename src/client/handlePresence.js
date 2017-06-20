@@ -19,7 +19,8 @@ module.exports = member => {
         // IGNORE
       } else if (dbObj.roleName !== '') {
         // Check if the memeber is streaming
-        if (member.presence.game !== null && member.presence.game.type === 1) {
+        // if (member.presence.game !== null && member.presence.game.type === 1) {
+        if (member.presence.status === 'idle') {
           // Add the role
           member.addRole(member.guild.roles.filter(obj => obj.name === dbObj.roleName).first())
             .catch(err => log.e(err))

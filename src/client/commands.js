@@ -5,4 +5,5 @@ module.exports = {
   invite: require('./commands/invite.js'),
   nick: require('./commands/nick.js'),
   name: require('./commands/name.js'),
+  setchannel: require('./commands/setChannel.js'),
 }
