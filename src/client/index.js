@@ -66,6 +66,15 @@ bot.on('ready', () => {
 
   // Save guild array
   dbSetup.updateGuilds(bot.guilds.array().map(o => o.id))
+
+  // Update all members on startup
+  // Iterate over every guild and member
+  for (let guild of bot.guilds.array()) {
+    for (let member of guild.members.array()) {
+      // Check it's presence
+      handlePresence(member)
+    }
+  }
 })
 
 /**
