@@ -15,7 +15,9 @@ module.exports = member => {
       let dbObj = db[member.guild.id]
 
       // Check if Role Name isn't blank
-      if (dbObj.roleName !== '') {
+      if (dbObj === undefined || dbObj.roleName === undefined) {
+        // IGNORE
+      } else if (dbObj.roleName !== '') {
         // Check if the memeber is streaming
         if (member.presence.game !== null && member.presence.game.type === 1) {
           // Add the role

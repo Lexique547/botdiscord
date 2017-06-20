@@ -30,6 +30,7 @@ const updateGuilds = arr => {
           db[id] = {
             prefixOverride: null,
             roleName: '',
+            announceStreams: false,
           }
         }
       }
