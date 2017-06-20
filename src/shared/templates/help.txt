@@ -1,0 +1,8 @@
+**{{botname}}**
+*{{desc}}*
+
+Command Format: `!COMMAND` `<REQUIRED PARAMTER>` `[OPTIONAL PARAMTER]`
+
+{{help_text}}
+
+*Built by {{author}}*
