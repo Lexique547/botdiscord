@@ -14,8 +14,11 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 const log = require('fancylog')
 
+// DB Setup Handlers
+const dbSetup = require('./dbSetup.js')
+
 // Call Database Setup
-require('./dbSetup.js').main()
+dbSetup.main()
 
 // Login to Discord
 bot.login(config.token)
@@ -57,6 +60,11 @@ bot.on('ready', () => {
     // Log
     log.e('Avatar not found. Check config.js')
   }
+
+  // Start Custom Logic
+
+  // Save guild array
+  dbSetup.updateGuilds(bot.guilds.array().map(o => o.id))
 })
 
 /**

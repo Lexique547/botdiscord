@@ -1,6 +1,7 @@
 // Package Dependencies
 const fs = require('fs')
 const path = require('path')
+const log = require('fancylog')
 const create = require('create-if-not-exist')
 
 // Define DB Location
@@ -14,6 +15,29 @@ const main = () => {
   // Create Database
   // Well it isn't really a database
   create(DB_PATH, JSON.stringify({}, null, 0))
+}
+
+/**
+ * Update the DB with guild info
+ * @param {Array} arr - Array of Guild IDs
+ * @returns {void}
+ */
+const updateGuilds = arr => {
+  accessDB()
+    .then(db => {
+      for (let id of arr) {
+        if (db[id] === undefined) {
+          db[id] = {
+            prefixOverride: null,
+            roleName: '',
+          }
+        }
+      }
+
+      return db
+    })
+    .then(saveDB)
+    .catch(err => log.e(err))
 }
 
 /**
