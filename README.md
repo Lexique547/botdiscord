@@ -1,3 +1,6 @@
+# WARNING
+THE CURRENT BUILD OF THE BOT IS A WIP. IF YOU WANT A USEABLE VERSION, [CLICK HERE](https://gitlab.com/lolPants/stream-role-bot/tree/3e18b22d54eb0ae35f6bf82448546e83cf62e11b)
+---
 # Stream Role Bot ![](https://gitlab.com/lolPants/stream-role-bot/badges/master/build.svg)
 _Discord Bot that assigns a role when someone is streaming._  
 Built by [Jack Baron](https://www.jackbaron.com)
