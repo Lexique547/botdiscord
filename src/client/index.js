@@ -1,5 +1,5 @@
 /*
-  Electra 2
+  Stream Role Bot
   By Jack Baron (me@jackbaron.com)
   Copyright (c) Jack Baron 2017
 */
