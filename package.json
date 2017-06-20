@@ -2,7 +2,7 @@
   "name": "stream-role-bot",
   "version": "0.1.0",
   "description": "Discord Bot that assigns a role when someone is streaming.",
-  "main": "src/client/",
+  "main": "src/client/index.js",
   "scripts": {
     "test": "gulp",
     "tag": "gulp tag-release",
