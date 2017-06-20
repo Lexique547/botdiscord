@@ -131,7 +131,7 @@ const mainFunc = command => {
   }
 
   // Read Template File
-  fs.readFile('./src/shared/templates/help.txt', 'utf8', (err, data) => {
+  fs.readFile('../shared/templates/help.txt', 'utf8', (err, data) => {
     // Handle Error
     if (err) return console.error(err)
 
