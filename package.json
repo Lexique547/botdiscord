@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "async-exit-hook": "^1.1.2",
+    "create-if-not-exist": "^0.0.2",
     "discord.js": "^11.1.0",
     "fancylog": "^3.0.0",
     "uws": "^0.14.5"

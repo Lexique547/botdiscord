@@ -14,6 +14,9 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 const log = require('fancylog')
 
+// Call Database Setup
+require('./dbSetup.js').main()
+
 // Login to Discord
 bot.login(config.token)
 
