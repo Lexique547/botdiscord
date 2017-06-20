@@ -67,6 +67,10 @@ bot.on('ready', () => {
   dbSetup.updateGuilds(bot.guilds.array().map(o => o.id))
 })
 
+bot.on('guildCreate', guild => {
+  dbSetup.updateGuilds([guild.id])
+})
+
 /**
  * Message Event Handler
  * Triggered when the bot sees a new message
