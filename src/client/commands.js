@@ -7,4 +7,5 @@ module.exports = {
   name: require('./commands/name.js'),
   setchannel: require('./commands/setChannel.js'),
   announce: require('./commands/announceStreams.js'),
+  ping: require('./commands/pingEveryone.js'),
 }
