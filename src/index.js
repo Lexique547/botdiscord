@@ -5,6 +5,7 @@ const exitHook = require('async-exit-hook')
 // Local Dependencies
 const Registry = require('./registry')
 const populateDB = require('./populateDB')
+const handleMember = require('./handleMember')
 
 // Environment Variables
 const { TOKEN, PREFIX, OWNER, PREFIX_SPACE } = process.env
@@ -29,6 +30,21 @@ bot.login(TOKEN)
 bot.on('ready', () => { populateDB(bot.guilds.array().map(x => x.id)) })
 bot.on('guildCreate', () => { populateDB(bot.guilds.array().map(x => x.id)) })
 bot.on('guildDelete', () => { populateDB(bot.guilds.array().map(x => x.id)) })
+
+// Handle Presence Updates
+bot.on('ready', () => {
+  for (let guild of bot.guilds.array()) {
+    for (let member of guild.members.array()) {
+      handleMember(bot, member)
+    }
+  }
+})
+bot.on('guildCreate', guild => {
+  for (let member of guild.members.array()) {
+    handleMember(bot, member)
+  }
+})
+bot.on('presenceUpdate', (old, member) => { handleMember(bot, member) })
 
 /**
  * Logout Function
