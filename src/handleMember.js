@@ -13,7 +13,7 @@ const DiscordMember = Discord.GuildMember // eslint-disable-line
  */
 
 // Local Dependencies
-const { getData, setData } = require('./accessDB')
+const { getData, setData } = require('./accessDB.js')
 
 /**
  * Handle Member Update

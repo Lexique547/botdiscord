@@ -1,5 +1,5 @@
 // Redis
-const redis = require('./db')
+const redis = require('./db.js')
 
 /**
  * @param {string[]} guilds Array of Guild IDs

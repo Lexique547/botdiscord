@@ -3,9 +3,9 @@ const Backend = require('statsbot-backend')
 const exitHook = require('async-exit-hook')
 
 // Local Dependencies
-const Registry = require('./registry')
-const populateDB = require('./populateDB')
-const handleMember = require('./handleMember')
+const Registry = require('./registry.js')
+const populateDB = require('./populateDB.js')
+const handleMember = require('./handleMember.js')
 
 // Environment Variables
 const { TOKEN, PREFIX, OWNER, PREFIX_SPACE } = process.env

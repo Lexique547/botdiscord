@@ -1,5 +1,5 @@
 // Redis
-const redis = require('./db')
+const redis = require('./db.js')
 
 /**
  * @typedef {Object} GuildSettings

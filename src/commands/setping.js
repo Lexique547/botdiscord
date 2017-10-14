@@ -2,7 +2,7 @@
 const Backend = require('statsbot-backend')
 
 // Local Dependencies
-const { getData, setData } = require('../accessDB')
+const { getData, setData } = require('../accessDB.js')
 
 // JSDoc Typing
 const Discord = require('discord.js')
