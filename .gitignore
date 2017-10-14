@@ -34,9 +34,3 @@ node_modules
 
 # VSCode
 .vscode
-
-# Config
-config.js
-
-# Data Store
-data.json
