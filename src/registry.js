@@ -5,7 +5,7 @@ const Backend = require('statsbot-backend')
 const Invite = require('./commands/invite.js')
 const Channels = require('./commands/channels.js')
 const Roles = require('./commands/roles.js')
-const SetPing = require('./commands/setPing.js')
+const SetPing = require('./commands/setping.js')
 
 const Registry = new Backend.Registry()
   .addCommand(Invite)
