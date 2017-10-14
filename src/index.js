@@ -4,6 +4,7 @@ const exitHook = require('async-exit-hook')
 
 // Local Dependencies
 const Registry = require('./registry')
+const populateDB = require('./populateDB')
 
 // Environment Variables
 const { TOKEN, PREFIX, OWNER, PREFIX_SPACE } = process.env
@@ -22,6 +23,22 @@ const bot = new Backend.Client()
   .addOwner(OWNER)
 
 bot.login(TOKEN)
+
+// Populate DB on events
+bot.on('ready', () => {
+  let guilds = bot.guilds.array().map(x => x.id)
+  populateDB(guilds)
+})
+
+bot.on('guildCreate', () => {
+  let guilds = bot.guilds.array().map(x => x.id)
+  populateDB(guilds)
+})
+
+bot.on('guildDelete', () => {
+  let guilds = bot.guilds.array().map(x => x.id)
+  populateDB(guilds)
+})
 
 /**
  * Logout Function
