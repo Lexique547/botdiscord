@@ -33,7 +33,9 @@ const main = async data => {
     // Get List of Channels
     const settings = await getData(guild.id)
     const IDs = settings.channels
-    let message = customMessage.setMessage(`Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`)
+
+    let str = settings.channels.length === 0 ? 'Notifications are disabled.' : `Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`
+    let message = customMessage.setMessage(str)
       .formattedMessage
     data.message.channel.send(message)
   } else if (data.arguments[0].toLowerCase() === 'reset') {
@@ -41,7 +43,10 @@ const main = async data => {
     let settings = await getData(guild.id)
     settings.channels = []
     await setData(guild.id, settings)
-    let message = customMessage.setMessage('Notifications are disabled.')
+
+    let str = settings.channels.length === 0 ? 'Notifications are disabled.' :
+      `Notifications are enabled in: ${settings.channels.map(x => `<#${x}>`).join(' ')}`
+    let message = customMessage.setMessage(str)
       .formattedMessage
     data.message.channel.send(message)
   } else {
@@ -62,7 +67,9 @@ const main = async data => {
       let settings = await getData(guild.id)
       settings.channels = IDs
       await setData(guild.id, settings)
-      let message = customMessage.setMessage(`Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`)
+
+      let str = settings.channels.length === 0 ? 'Notifications are disabled.' : `Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`
+      let message = customMessage.setMessage(str)
         .formattedMessage
       data.message.channel.send(message)
     }
