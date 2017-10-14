@@ -6,7 +6,7 @@ const exitHook = require('async-exit-hook')
 const Registry = require('./registry')
 
 // Environment Variables
-const { TOKEN, PREFIX, OWNER, STATUS } = process.env
+const { TOKEN, PREFIX, OWNER, PREFIX_SPACE } = process.env
 
 const bot = new Backend.Client()
   // Meta Data
@@ -18,9 +18,8 @@ const bot = new Backend.Client()
   .addRegistry(Registry)
   // Bot Runtime
   .setPrefix(PREFIX)
+  .setIgnorePrefixSpacing(PREFIX_SPACE === undefined)
   .addOwner(OWNER)
-  // Bot Statuses
-  .addStatus(STATUS.split(','))
 
 bot.login(TOKEN)
 
