@@ -50,7 +50,7 @@ const main = async data => {
 
 const Invite = new Backend.Command()
   .setName('invite')
-  .setDescription('DMs you a link to invite the bot to your server')
+  .setDescription('DMs you a link to invite the bot to your server.')
   .setMain(main)
 
 module.exports = Invite
