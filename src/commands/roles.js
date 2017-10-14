@@ -27,49 +27,50 @@ const main = async data => {
 
   // Define Custom Message
   const customMessage = new Backend.MessageBuilder()
-    .setName('Channels')
+    .setName('Roles')
 
   if (data.arguments.length === 0) {
-    // Get List of Channels
+    // Get List of Roles
     const settings = await getData(guild.id)
-    const IDs = settings.channels
+    const roleMap = settings.roles.map(x => data.message.guild.roles.get(x))
 
-    let str = settings.channels.length === 0 ? 'Notifications are disabled.' : `Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`
+    let str = settings.roles.length === 0 ? 'No roles set.' : `Roles enabled: ${roleMap.map(x => `'${x.name}'`).join(', ')}`
     let message = customMessage.setMessage(str)
       .formattedMessage
     data.message.channel.send(message)
   } else if (data.arguments[0].toLowerCase() === 'reset') {
-    // Reset channels
+    // Reset roles
     let settings = await getData(guild.id)
-    settings.channels = []
+    settings.roles = []
     await setData(guild.id, settings)
+    let roleMap = settings.roles.map(x => data.message.guild.roles.get(x))
 
-    let str = settings.channels.length === 0 ? 'Notifications are disabled.' :
-      `Notifications are enabled in: ${settings.channels.map(x => `<#${x}>`).join(' ')}`
+    let str = settings.roles.length === 0 ? 'No roles set.' :
+      `Roles enabled: ${roleMap.map(x => `'${x.name}'`).join(', ')}`
     let message = customMessage.setMessage(str)
       .formattedMessage
     data.message.channel.send(message)
   } else {
-    // Set List of Channels
-    let channels = data.arguments.map(x => x.replace(/<#([0-9]+)>/, '$1'))
-      .map(x => data.client.channels.get(x))
+    // Set List of Roles
+    let roles = data.arguments.map(x => data.message.guild.roles.find('name', x))
       .filter(x => x !== undefined)
 
-    if (channels.length === 0) {
-      // Send error if no valid channels are found
+    if (roles.length === 0) {
+      // Send error if no valid roles are found
       let message = customMessage.setError()
-        .setMessage('No valid channels found.')
+        .setMessage('No valid roles found.')
         .formattedMessage
       data.message.channel.send(message)
     } else {
       // Remove Duplicates
-      let IDs = Array.from(new Set(channels.map(x => x.id)))
+      let rolesFilter = Array.from(new Set(roles.map(x => x.id)))
+      let roleMap = rolesFilter.map(x => data.message.guild.roles.get(x))
 
       let settings = await getData(guild.id)
-      settings.channels = IDs
+      settings.roles = rolesFilter
       await setData(guild.id, settings)
 
-      let str = settings.channels.length === 0 ? 'Notifications are disabled.' : `Notifications are enabled in: ${IDs.map(x => `<#${x}>`).join(' ')}`
+      let str = settings.roles.length === 0 ? 'No roles set.' : `Roles enabled: ${roleMap.map(x => `'${x.name}'`).join(', ')}`
       let message = customMessage.setMessage(str)
         .formattedMessage
       data.message.channel.send(message)
@@ -77,11 +78,11 @@ const main = async data => {
   }
 }
 
-const Channels = new Backend.Command()
-  .setName('channels')
-  .setDescription('Gets / sets announcement channels.')
+const Roles = new Backend.Command()
+  .setName('roles')
+  .setDescription('Gets / sets roles to use.')
   .setMain(main)
   .setAdmin()
-  .addArgument('?channels')
+  .addArgument('?roles')
 
-module.exports = Channels
+module.exports = Roles
