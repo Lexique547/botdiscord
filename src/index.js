@@ -22,6 +22,7 @@ const bot = new Backend.Client()
   .setIgnorePrefixSpacing(PREFIX_SPACE === undefined)
   .addOwner(OWNER)
 
+// Login to Discord
 bot.login(TOKEN)
 
 // Populate DB on events
