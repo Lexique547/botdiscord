@@ -25,20 +25,9 @@ const bot = new Backend.Client()
 bot.login(TOKEN)
 
 // Populate DB on events
-bot.on('ready', () => {
-  let guilds = bot.guilds.array().map(x => x.id)
-  populateDB(guilds)
-})
-
-bot.on('guildCreate', () => {
-  let guilds = bot.guilds.array().map(x => x.id)
-  populateDB(guilds)
-})
-
-bot.on('guildDelete', () => {
-  let guilds = bot.guilds.array().map(x => x.id)
-  populateDB(guilds)
-})
+bot.on('ready', () => { populateDB(bot.guilds.array().map(x => x.id)) })
+bot.on('guildCreate', () => { populateDB(bot.guilds.array().map(x => x.id)) })
+bot.on('guildDelete', () => { populateDB(bot.guilds.array().map(x => x.id)) })
 
 /**
  * Logout Function
