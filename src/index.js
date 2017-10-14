@@ -35,16 +35,16 @@ bot.on('guildDelete', () => { populateDB(bot.guilds.array().map(x => x.id)) })
 bot.on('ready', () => {
   for (let guild of bot.guilds.array()) {
     for (let member of guild.members.array()) {
-      handleMember(bot, member)
+      handleMember(member)
     }
   }
 })
 bot.on('guildCreate', guild => {
   for (let member of guild.members.array()) {
-    handleMember(bot, member)
+    handleMember(member)
   }
 })
-bot.on('presenceUpdate', (old, member) => { handleMember(bot, member) })
+bot.on('presenceUpdate', (old, member) => { handleMember(member, true) })
 
 /**
  * Logout Function

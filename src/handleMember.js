@@ -9,16 +9,20 @@ const { getData } = require('./accessDB')
 
 /**
  * Handle Member Update
- * @param {BackendClient} bot Client
  * @param {DiscordMember} member Member Object
+ * @param {boolean} [announce] Announce to Channel?
  */
-const handleMember = async (bot, member) => {
+const handleMember = async (member, announce = false) => {
   const settings = await getData(member.guild.id)
   try {
     let activity = member.presence.activity
     let roles = settings.roles.map(x => member.guild.roles.get(x))
     if (activity !== null && activity.type === 'STREAMING') {
       for (let role of roles) { member.addRole(role) }
+      if (announce) {
+        // Announce to channels
+        // TODO
+      }
     } else {
       for (let role of roles) { member.removeRole(role) }
     }
