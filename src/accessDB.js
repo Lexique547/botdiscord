@@ -5,6 +5,7 @@ const redis = require('./db')
  * @typedef {Object} GuildSettings
  * @property {string[]} roles
  * @property {string[]} channels
+ * @property {string[]} liveIDs
  * @property {boolean} mentionEveryone
  */
 

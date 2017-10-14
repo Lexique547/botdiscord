@@ -19,6 +19,7 @@ const fillGuild = async guild => {
     const template = {
       roles: [],
       channels: [],
+      liveIDs: [],
       mentionEveryone: false,
     }
     return redis.set(guild, JSON.stringify(template))
